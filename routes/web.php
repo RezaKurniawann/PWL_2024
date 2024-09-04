@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +19,72 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('biodata');
+// Route::get('/', function () {
+//     return view('biodata');
+// });
+
+// Route::get('/hello', function () {
+//     return 'Hello';
+// });
+
+Route::get('/world', function () {
+    return 'World';
 });
+
+// Route::get('/hello', function () {
+//     return 'Hello World';
+// });
+
+
+// Route::get('/', function () {
+//     return 'Selamat Datang';
+// });
+
+// Route::get('/about', function () {
+//     return 
+//     'Nama   : Reza Kurniawan <br> NIM    : 2241760059';
+// });
+
+// Route::get('/user/{name}', function ($name) {
+//     return 'Nama saya ' . $name;
+// });
+
+Route::get('/posts/{post}/comments/{comment}', function ($postID, $commentID) {
+    return 'Pos ke-' . $postID . " Komentar ke-" . $commentID;
+});
+
+// Route::get('/articles/{id}', function ($articleID) {
+//     return 'Halaman Artikel dengan ID {' . $articleID . '}';
+// });
+
+// Route::get('/user/{name?}', function ($name = null) {
+//     return 'Nama saya ' . $name;
+// });
+
+Route::get('/user/{name?}', function ($name = 'Reza Kurniawan') {
+    return 'Nama saya ' . $name;
+});
+
+
+Route::get('/hello', [WelcomeController::class, 'hello']);
+
+// Route::get('/', [PageController::class, 'index']);
+// Route::get('/about', [PageController::class, 'about']);
+// Route::get('/articles/{id}', [PageController::class, 'articles']);
+
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/about', [AboutController::class, 'about']);
+Route::get('/articles/{id}', [ArticleController::class, 'articles']);
+
+// Route::resource('photos', PhotoController::class)->only([
+//     'index', 'show'
+// ]);
+// Route::resource('photos', PhotoController::class)->except([
+//     'create', 'store', 'update', 'destroy'
+// ]);
+   
+// Route::get ('/greeting', function () {
+//     return view('blog.hello ', ['name' => 'Reza Kurniawan']);
+// });
+
+Route::get ('/greeting', [WelcomeController::class, 'greeting']);
